@@ -4,8 +4,8 @@ In this sprint, you will create a simple command-line application to store and r
 
 The application should allow you to:
  - store a user id and password as a secret in `secretsmanager`
- - list all the stored secret
- - retrieve a secret - the resulting user id and password should not be printed out but should be stored as environment variables.
+ - list all the stored secrets
+ - retrieve a secret - the resulting user id and password should not be printed out but should be stored in a file.
  - delete a secret.
 
 The basic workflow should look like this:
@@ -18,7 +18,7 @@ y
 > Invalid input. Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
 l
 > 0 password(s) available
-> Please specify [e]ntry, [r]etrieval or [l]isting:
+> Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
 e
 > Secret identifier: 
 Missile_Launch_Codes
@@ -35,8 +35,7 @@ l
 r
 > Specify secret to retrieve:
 Missile_Launch_Codes
-> UserId stored in CURRENT_USER_ID environment variable.
-> Password stored in CURRENT_PASSWORD environment variable.
+> Secrets stored in local file secrets.txt
 > Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
 d
 > Specify secret to delete:
@@ -47,15 +46,27 @@ x
 > Thank you. Goodbye.
 
 # In the shell:
-echo ${CURRENT_USER_ID}
-bidenj 
-echo ${CURRENT_PASSWORD}
-pa55word
+cat secrets.txt
+UserId: bidenj
+Password: Pa55word
 ```
 
  - Ensure that your code is thoroughly unit-tested. Use mocks if you need to. (Use of the `moto` library to mock `secretsmanager` is encouraged but not required.)
- - Ensure that you use `try...except` to manage potential errors.
+ - Ensure that you use `try...except` to manage potential errors. Input errors or `boto3` client errors should be handled "gracefully" - ie the user should get some informative response and teh application should continue running. For example:
+ ```
+> Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
+l
+> 1 secret(s) available
+  Missile_Launch_Codes
+> Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
+r
+> Specify secret to retrieve:
+Fortnite_Password
+> That is not a valid secret.
+> Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
+...
+```
 
  There are many enhancements you could make. Feel free to increase the sophistication of the interface.
- 
+
 
