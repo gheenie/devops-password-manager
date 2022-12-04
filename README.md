@@ -52,7 +52,7 @@ Password: Pa55word
 ```
 
  - Ensure that your code is thoroughly unit-tested. Use mocks if you need to. (Use of the `moto` library to mock `secretsmanager` is encouraged but not required.)
- - Ensure that you use `try...except` to manage potential errors. Input errors or `boto3` client errors should be handled "gracefully" - ie the user should get some informative response and teh application should continue running. For example:
+ - Ensure that you use `try...except` to manage potential errors. Input errors or `boto3` client errors should be handled "gracefully" - ie the user should get some informative response and the application should continue running. For example:
  ```
 > Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
 l
