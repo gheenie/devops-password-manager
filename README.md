@@ -31,7 +31,7 @@ python password_manager.py
 y
 > Invalid input. Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
 l
-> 0 password(s) available
+> 0 secret(s) available
 > Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
 e
 > Secret identifier: 
