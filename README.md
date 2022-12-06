@@ -12,7 +12,7 @@ Create a Python script that:
 1. Deletes the bucket.
 1. Checks that the bucket is deleted by listing the available buckets (should be none).
 
-## Task 2 - AWS-Powered Password Manager
+## Task Two - AWS-Powered Password Manager
 
 In this task, you will create a simple command-line application to store and retrieve passwords. The passwords will be stored in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/). Accessing your AWS account (with your Access Key Id and Secret Key) will be considered sufficient authorisation to retrieve the passwords.
 
