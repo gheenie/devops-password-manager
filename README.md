@@ -24,8 +24,7 @@ The application should allow you to:
 
 The basic workflow should look like this:
 ```bash
-awsume sandbox # or whatever means you use to authenticate
-[Sandbox]
+# Assuming you have authenticated to a sandbox account...
 python password_manager.py
 > Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it:
 y
