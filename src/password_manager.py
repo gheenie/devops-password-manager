@@ -2,7 +2,7 @@ import boto3
 import json
 
 
-client = boto3.client('secretsmanager')
+secrets_manager = boto3.client('secretsmanager')
 
 
 def create_secret():
@@ -12,7 +12,7 @@ def create_secret():
     secret_json = { 'user_id': user_id, 'password': password }
 
     try:
-        response = client.create_secret(
+        response = secrets_manager.create_secret(
             Name=secret_id,
             SecretString=json.dumps(secret_json)
         )
