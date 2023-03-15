@@ -3,7 +3,7 @@ import os
 from moto import mock_secretsmanager
 import boto3
 from moto.core import patch_client
-from src.password_manager import (client, create_secret)
+from src.password_manager import (secrets_manager, create_secret)
 
 
 @pytest.fixture(scope='function')
@@ -18,18 +18,20 @@ def aws_credentials():
 
 
 @pytest.fixture(scope='function')
-def secretsmanager(aws_credentials):
+def premock_secretsmanager(aws_credentials):
     with mock_secretsmanager():
         yield boto3.client('secretsmanager', region_name='us-east-1')
 
 
 @pytest.fixture
-def precreate_secret(secretsmanager):
+def precreate_secret(premock_secretsmanager):
+    patch_client(secrets_manager)
+
     create_secret()
 
 
-def test_valid_secrets_successfully_stores_in_secretsmanager(secretsmanager):
-    patch_client(client)
+def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmanager):
+    patch_client(secrets_manager)
 
     response = create_secret()
     
