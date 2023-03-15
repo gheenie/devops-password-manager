@@ -3,7 +3,7 @@ import os
 from moto import mock_secretsmanager
 import boto3
 from moto.core import patch_client
-from src import password_manager
+from src.password_manager import (client, create_secret)
 
 
 @pytest.fixture(scope='function')
@@ -24,13 +24,13 @@ def secretsmanager(aws_credentials):
 
 
 @pytest.fixture
-def create_secret(secretsmanager):
-    password_manager.create_secret()
+def precreate_secret(secretsmanager):
+    create_secret()
 
 
 def test_valid_secrets_successfully_stores_in_secretsmanager(secretsmanager):
-    patch_client(password_manager.client)
+    patch_client(client)
 
-    response = password_manager.create_secret()
+    response = create_secret()
     
     assert response['ARN'].startswith('arn:aws') == True
