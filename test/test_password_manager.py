@@ -24,13 +24,6 @@ def premock_secretsmanager(aws_credentials):
         yield 'something random'
 
 
-@pytest.fixture
-def precreate_secret(premock_secretsmanager):
-    # patch_client(secrets_manager)
-
-    create_secret()
-
-
 def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmanager):
     # patch_client(secrets_manager)
 
