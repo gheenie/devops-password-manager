@@ -45,7 +45,7 @@ def test_creating_existing_secret_throws_error(premock_secretsmanager):
     create_secret()
     output = create_secret()
 
-    assert output == 'An unexpected error occured.'
+    assert output == 'Secret ID already exists.'
 
 
 def test_list_secrets__no_secrets(premock_secretsmanager):
@@ -53,5 +53,4 @@ def test_list_secrets__no_secrets(premock_secretsmanager):
 
     output = list_secrets()
 
-    
-
+    assert output == '0 secret(s) available'
