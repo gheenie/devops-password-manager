@@ -1,5 +1,6 @@
 import boto3
 import json
+from botocore.exceptions import ClientError
 
 
 secrets_manager = boto3.client('secretsmanager')
@@ -18,8 +19,13 @@ def create_secret():
         )
 
         return 'Secret saved.'
-    except Exception as e:
-        print(e)
+    except ClientError as error:
+        if error.response['Error']['Code'] == 'ResourceExistsException':
+            return 'Secret ID already exists.'
+        else:
+            return 'An unexpected error occured.'
+    except Exception as error:
+        print(error)
         
         return 'An unexpected error occured.'
 
