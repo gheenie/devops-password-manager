@@ -12,12 +12,12 @@ def create_secret():
     secret_json = { 'user_id': user_id, 'password': password }
 
     try:
-        response = secrets_manager.create_secret(
+        secrets_manager.create_secret(
             Name=secret_id,
             SecretString=json.dumps(secret_json)
         )
 
-        return response
+        return 'Secret saved.'
     except Exception as e:
         print(e)
         
@@ -25,3 +25,7 @@ def create_secret():
 
 # response = create_secret()
 # print(response)
+
+
+def list_secrets():
+    pass
