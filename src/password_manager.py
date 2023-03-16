@@ -21,7 +21,7 @@ def create_secret():
         return 'Secret saved.'
     except ClientError as error:
         print(error)
-        
+
         if error.response['Error']['Code'] == 'ResourceExistsException':
             return 'Secret ID already exists.'
         else:
@@ -31,9 +31,23 @@ def create_secret():
         
         return 'An unexpected error occured.'
 
-# response = create_secret()
-# print(response)
-
 
 def list_secrets():
-    pass
+    try:
+        secret_list = secrets_manager.list_secrets()['SecretList']
+
+        message = f'{len(secret_list)} secret(s) available'
+
+        return message
+    except Exception as error:
+        print(error)
+        
+        return 'An unexpected error occured.'
+
+
+# response = list_secrets()
+# print(response)
+# response = create_secret()
+# print(response)
+# response = list_secrets()
+# print(response)
