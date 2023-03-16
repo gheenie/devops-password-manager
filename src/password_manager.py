@@ -20,6 +20,8 @@ def create_secret():
 
         return 'Secret saved.'
     except ClientError as error:
+        print(error)
+        
         if error.response['Error']['Code'] == 'ResourceExistsException':
             return 'Secret ID already exists.'
         else:
