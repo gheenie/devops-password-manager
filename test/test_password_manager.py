@@ -20,7 +20,8 @@ def aws_credentials():
 @pytest.fixture(scope='function')
 def premock_secretsmanager(aws_credentials):
     with mock_secretsmanager():
-        yield boto3.client('secretsmanager', region_name='us-east-1')
+        # yield boto3.client('secretsmanager', region_name='us-east-1')
+        yield 'something random'
 
 
 @pytest.fixture
@@ -47,7 +48,10 @@ def test_creating_existing_secret_throws_error(premock_secretsmanager):
     assert output == 'An unexpected error occured.'
 
 
-def test_list_secrets__no_secrets(precreate_secret):
+def test_list_secrets__no_secrets(premock_secretsmanager):
     patch_client(secrets_manager)
 
     output = list_secrets()
+
+    
+
