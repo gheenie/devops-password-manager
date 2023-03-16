@@ -27,10 +27,16 @@ def premock_secretsmanager(aws_credentials):
 def precreate_secret(premock_secretsmanager):
     patch_client(secrets_manager)
 
+    create_secret()
+
+
+def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmanager):
+    patch_client(secrets_manager)
+
     response = create_secret()
+    
+    assert response['ARN'].startswith('arn:aws') == True
 
-    return response
 
-
-def test_valid_secrets_successfully_stores_in_secretsmanager(precreate_secret):
-    assert precreate_secret['ARN'].startswith('arn:aws') == True
+def test_creating_same_secret_throws_error(precreate_secret):
+    pass
