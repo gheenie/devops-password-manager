@@ -3,7 +3,7 @@ import os
 from moto import mock_secretsmanager
 import boto3
 from moto.core import patch_client
-from src.password_manager import (secrets_manager, create_secret)
+from src.password_manager import (secrets_manager, create_secret, list_secrets)
 
 
 @pytest.fixture(scope='function')
@@ -33,15 +33,21 @@ def precreate_secret(premock_secretsmanager):
 def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmanager):
     patch_client(secrets_manager)
 
-    response = create_secret()
+    output = create_secret()
     
-    assert response['ARN'].startswith('arn:aws') == True
+    assert output == 'Secret saved.'
 
 
-def test_creating_same_secret_throws_error(precreate_secret):
+def test_creating_existing_secret_throws_error(premock_secretsmanager):
     patch_client(secrets_manager)
 
     create_secret()
-    response = create_secret()
+    output = create_secret()
 
-    assert response == 'An unexpected error occured.'
+    assert output == 'An unexpected error occured.'
+
+
+def test_list_secrets__no_secrets(precreate_secret):
+    patch_client(secrets_manager)
+
+    output = list_secrets()
