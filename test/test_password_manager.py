@@ -39,4 +39,9 @@ def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmana
 
 
 def test_creating_same_secret_throws_error(precreate_secret):
-    pass
+    patch_client(secrets_manager)
+
+    create_secret()
+    response = create_secret()
+
+    assert response == 'An unexpected error occured.'
