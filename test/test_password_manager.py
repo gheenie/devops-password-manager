@@ -21,7 +21,7 @@ def aws_credentials():
 def premock_secretsmanager(aws_credentials):
     with mock_secretsmanager():
         # yield boto3.client('secretsmanager', region_name='us-east-1')
-        yield 'something random'
+        yield 'unused string, this is just to prevent mock from closing'
 
 
 def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmanager):
