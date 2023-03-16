@@ -26,13 +26,13 @@ def premock_secretsmanager(aws_credentials):
 
 @pytest.fixture
 def precreate_secret(premock_secretsmanager):
-    patch_client(secrets_manager)
+    # patch_client(secrets_manager)
 
     create_secret()
 
 
 def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmanager):
-    patch_client(secrets_manager)
+    # patch_client(secrets_manager)
 
     output = create_secret()
     
@@ -40,7 +40,7 @@ def test_valid_secrets_successfully_stores_in_secretsmanager(premock_secretsmana
 
 
 def test_creating_existing_secret_throws_error(premock_secretsmanager):
-    patch_client(secrets_manager)
+    # patch_client(secrets_manager)
 
     create_secret()
     output = create_secret()
@@ -49,8 +49,6 @@ def test_creating_existing_secret_throws_error(premock_secretsmanager):
 
 
 def test_list_secrets__no_secrets(premock_secretsmanager):
-    patch_client(secrets_manager)
-
     output = list_secrets()
 
     assert output == '0 secret(s) available'
