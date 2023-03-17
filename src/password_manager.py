@@ -37,6 +37,8 @@ def list_secrets():
         secret_list = secrets_manager.list_secrets()['SecretList']
 
         message = f'{len(secret_list)} secret(s) available'
+        for secret in secret_list:
+            message += '\n' + secret['Name']
 
         return message
     except Exception as error:
