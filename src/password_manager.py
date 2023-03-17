@@ -6,10 +6,7 @@ from botocore.exceptions import ClientError
 secrets_manager = boto3.client('secretsmanager')
 
 
-def create_secret():
-    secret_id = 'Missile_Launch_Codes2'
-    user_id = 'bidenj'
-    password = 'pa55word'
+def create_secret(secret_id = 'Missile_Launch_Codes2', user_id = 'bidenj', password = 'pa55word'):
     secret_json = { 'user_id': user_id, 'password': password }
 
     try:
