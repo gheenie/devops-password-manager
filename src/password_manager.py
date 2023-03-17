@@ -49,7 +49,7 @@ def retrieve_secret(secret_id):
     try:
         output_filename = 'secret.txt'
         output_path = f'data/{output_filename}'
-        
+
         secret_string = secrets_manager.get_secret_value(SecretId=secret_id)['SecretString']
 
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -68,4 +68,6 @@ def retrieve_secret(secret_id):
 # response = create_secret()
 # print(response)
 # response = list_secrets()
+# print(response)
+# response = retrieve_secret('Missile_Launch_Codes2')
 # print(response)
