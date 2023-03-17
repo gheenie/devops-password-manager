@@ -45,3 +45,10 @@ def test_list_secrets__no_secrets(premock_secretsmanager):
     output = list_secrets()
 
     assert output == '0 secret(s) available'
+
+
+def test_list_secrets__secrets_do_exist(premock_secretsmanager):
+    create_secret()
+    output = list_secrets()
+
+    assert output == '1 secret(s) available\nMissile_Launch_Codes2'
