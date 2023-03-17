@@ -3,7 +3,8 @@ import os
 from moto import mock_secretsmanager
 import boto3
 from moto.core import patch_client
-from src.password_manager import (secrets_manager, create_secret, list_secrets)
+from src.password_manager import (create_secret, list_secrets, retrieve_secret)
+import json
 
 
 @pytest.fixture(scope='function')
@@ -53,3 +54,16 @@ def test_list_secrets__secrets_do_exist(premock_secretsmanager):
     output = list_secrets()
 
     assert output == '2 secret(s) available\nMissile_Launch_Codes2\nsecret_id2'
+
+
+def test_retrieve_secret_that_exists(premock_secretsmanager):
+    output_filename = 'secret.txt'
+    output_path = f'data/{output_filename}'
+
+    create_secret()
+    output = retrieve_secret('Missile_Launch_Codes2')
+
+    assert output == f'Secrets stored in local file {output_filename}'
+
+    with open(output_path, 'r', encoding='utf-8') as file:
+        assert file.read() == json.dumps({ 'user_id': 'bidenj', 'password': 'pa55word' })
